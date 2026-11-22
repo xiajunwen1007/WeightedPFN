@@ -1,0 +1,7 @@
+# Weights are distributed through Hugging Face (GitHub rejects files over 100 MB)
+weights/*.safetensors
+__pycache__/
+*.egg-info/
+.DS_Store
+# Maintainer files for the Hugging Face upload (model card source and upload script); kept locally
+huggingface/

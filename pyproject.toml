@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "weightedpfn"
+version = "1.0.0"
+description = "WeightedPFN: a tabular foundation model for weighted regression and weighted classification (scikit-learn interface)"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+dependencies = ["tabpfn==9.2.0", "torch>=2.5", "scikit-learn>=1.6", "numpy", "safetensors"]
+
+[project.urls]
+Homepage = "https://github.com/xiajunwen1007/WeightedPFN"
+"Model weights" = "https://huggingface.co/xiajunwen/WeightedPFN"
+
+[tool.setuptools]
+packages = ["weightedpfn"]
+license-files = ["LICENSE", "LICENSE-Apache-2.0", "NOTICE"]

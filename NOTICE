@@ -1,0 +1,46 @@
+WeightedPFN: a fine-tuned derivative of TabPFN-3.5 with weighted attention
+
+Attribution Notice (TABPFN-3.5 Non-Commercial License, Section 3(b)):
+
+The TABPFN-3.5 Model is licensed by Prior Labs GmbH under the TABPFN-3.5 Non-Commercial License.
+Copyright © Prior Labs GmbH 2026.
+ THE SERVICES ARE PROVIDED FREE OF CHARGE: COMPANY SHALL NOT BE LIABLE FOR DAMAGES RESULTING FROM SLIGHT NEGLIGENCE. LIABILITY FOR GROSS NEGLIGENCE AND INTENTIONAL MISCONDUCT REMAINS UNAFFECTED.
+
+Modification statement (Section 3(c)(i)):
+
+We have modified the TABPFN-3.5 Model. This distribution is a Derivative of TABPFN-3.5 (checkpoint
+tabpfn-v3.5-20260909): the two weight files in this distribution were fine-tuned from the TABPFN-3.5 weights for 800
+steps on synthetic missing-data tasks, and the code in weightedpfn/ changes the TABPFN-3.5 attention and
+column preprocessing at run time so that training rows can carry sample weights.
+
+Not an official product (Section 3(c)(iii)):
+
+This distribution is not an official product of Prior Labs GmbH and has not been endorsed, approved or validated by
+Prior Labs GmbH.
+
+License (Section 3(a)):
+
+A copy of the TABPFN-3.5 Non-Commercial License is included as LICENSE. Any rights to use the TABPFN-3.5
+Model and this Derivative are granted directly by Prior Labs GmbH to you under that License. In particular, use is
+limited to Non-Commercial Purposes, and the model may not be offered as part of a hosted, managed, API or SaaS service
+(paid or free) without a commercial license from Prior Labs GmbH.
+
+Third-party code: tabpfn (Apache License 2.0):
+
+The file weightedpfn/_patch.py contains code adapted from the tabpfn Python package, version 9.2.0
+(https://github.com/priorlabs/tabpfn), which is licensed under the Apache License, Version 2.0; a copy is included as
+LICENSE-Apache-2.0. The NOTICE file of tabpfn reads:
+
+    TabPFN
+    Copyright (c) 2026 Prior Labs GmbH
+
+Modifications: the WeightedPFN authors reimplemented ICLAttention.forward, _chunked_class_attention and
+TabPFNV3p5._preprocess_raw (including the empirical-CDF context built by _build_ecdf_context) so that training rows can
+carry sample weights, through an additive log-weight attention bias and weighted column statistics. The modified
+functions replace the originals at run time; the installed tabpfn package itself is not changed.
+
+Disclaimer:
+
+This distribution is provided "as is", without warranties of any kind, express or implied. To the extent permitted by
+law, the authors of this distribution and Prior Labs GmbH are not liable for any damages arising from its use; the
+limitation of liability in Section 5 of the TABPFN-3.5 Non-Commercial License applies.

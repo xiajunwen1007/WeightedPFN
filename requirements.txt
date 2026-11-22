@@ -1,0 +1,6 @@
+# The weighting patch replaces internals of tabpfn's TabPFN-3.5 architecture: keep tabpfn at 9.2.0.
+tabpfn==9.2.0
+torch>=2.5
+scikit-learn>=1.6
+numpy
+safetensors

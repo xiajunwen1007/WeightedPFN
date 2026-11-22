@@ -1,0 +1,2 @@
+d458b7fc6aaa50a51f5d8a0c85a923faea4c957acebe32ca4780632304fedcfe  weights/weightedpfn-v3.5-classifier.safetensors
+8d1b22898206bd3e05b2f88494f768f24021386e119ec0ae2737df24e411b5c3  weights/weightedpfn-v3.5-regressor.safetensors
