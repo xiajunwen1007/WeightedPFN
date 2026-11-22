@@ -2,7 +2,7 @@
 
 **A tabular foundation model for weighted regression and weighted classification.**
 
-Official code for the paper *Tabular Foundation Model for Weighted Regression and Classification*
+Official code for the paper *Tabular Foundation Models for Weighted Regression and Classification*
 (Junwen Xia, Yan He, Dehan Kong and Zhenhua Lin).
 
 **Weighted regression** and **weighted classification** have applications ranging from missing-data analysis and
@@ -106,7 +106,7 @@ liability in Section 5 of the License applies.
 
 ```bibtex
 @misc{xia2026weightedpfn,
-  title  = {Tabular Foundation Model for Weighted Regression and Classification},
+  title  = {Tabular Foundation Models for Weighted Regression and Classification},
   author = {Xia, Junwen and He, Yan and Kong, Dehan and Lin, Zhenhua},
   year   = {2026},
   note   = {Preprint}
