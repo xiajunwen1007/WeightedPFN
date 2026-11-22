@@ -5,11 +5,13 @@
 Official code for the paper *Tabular Foundation Model for Weighted Regression and Classification*
 (Junwen Xia, Yan He, Dehan Kong and Zhenhua Lin).
 
-WeightedPFN makes predictions with sample weights, so that different observations contribute differently to the
-prediction. **Weighted regression** and **weighted classification** are widely used in missing-data analysis, causal
-inference, insurance pricing, and particle physics, and WeightedPFN can be applied in all of these areas. In our
-experiments on missing-data and causal tasks, it achieves strong predictive performance with runtimes comparable to
-those of linear baselines.
+**Weighted regression** and **weighted classification** have applications ranging from missing-data analysis and
+causal inference to insurance pricing and particle physics. Existing weighted methods must be fitted and tuned on each
+dataset, which is costly for flexible nonlinear learners. Tabular foundation models such as TabPFN-3.5 avoid this cost
+by predicting on a new dataset in a single forward pass, but they cannot use sample weights. We propose WeightedPFN,
+which adapts TabPFN-3.5 to weighted prediction through weighted attention, a normalized weighted loss, and pretraining
+on synthetic weighted prediction tasks from missing-data problems. It performs strongly on real missing-data and
+out-of-distribution causal tasks while running about as fast as linear baselines.
 
 This repository currently provides the fine-tuned weights and the inference code. The training code will be released
 after the paper is published.
