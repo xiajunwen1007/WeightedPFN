@@ -1,6 +1,6 @@
 # WeightedPFN
 
-**A tabular foundation model for weighted regression and weighted classification.**
+**Tabular foundation models for weighted regression and weighted classification.**
 
 Official code for the paper *Tabular Foundation Models for Weighted Regression and Classification*
 (Junwen Xia, Yan He, Dehan Kong and Zhenhua Lin).
