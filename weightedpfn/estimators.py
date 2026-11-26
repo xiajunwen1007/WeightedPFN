@@ -7,6 +7,8 @@ query chunks of 16384 rows; the regressor uses no target transform and no row su
 """
 from __future__ import annotations
 
+import os
+import shutil
 import threading
 from contextlib import nullcontext
 from pathlib import Path
@@ -50,6 +52,30 @@ def clear_model_cache():
         torch.cuda.empty_cache()
 
 
+def _real_named_file(path):
+    """A regular file with the same name as ``path`` (``path`` itself unless it is a symlink to a differently named file).
+
+    The Hugging Face cache stores each file as a symlink to a blob named after its hash. tabpfn resolves symlinks and
+    reads the model version and the file format from the resolved name, so the blob is hard-linked (or, across file
+    systems, copied once) under its original name in ~/.cache/weightedpfn/<blob name>/.
+    """
+    target = path.resolve()
+    if target.name == path.name:
+        return target
+    folder = Path(os.environ.get("XDG_CACHE_HOME") or Path.home() / ".cache") / "weightedpfn" / target.name
+    named = folder / path.name
+    if not (named.is_file() and named.stat().st_size == target.stat().st_size):
+        folder.mkdir(parents=True, exist_ok=True)
+        partial = named.with_name(named.name + ".partial")
+        partial.unlink(missing_ok=True)
+        try:
+            os.link(target, partial)
+        except OSError:
+            shutil.copyfile(target, partial)
+        os.replace(partial, named)
+    return named
+
+
 def _network(kind, model_path, options):
     """Build the network from a TabPFN-3.5 safetensors file once and hand it to TabPFN as in-memory ModelSpecs."""
     from tabpfn import TabPFNClassifier, TabPFNRegressor
@@ -57,13 +83,14 @@ def _network(kind, model_path, options):
 
     from tabpfn.architectures.tabpfn_v3_5 import TabPFNV3p5
 
-    path = Path(model_path).expanduser().resolve()
+    path = Path(model_path).expanduser().absolute()
     if not path.is_file():
         raise FileNotFoundError(f"Model weights not found: {path}. Download them with "
                                 "weightedpfn.download_weights() and pass model_path=..., or point "
                                 "model_path to a local copy.")
     if "v3.5" not in path.name:
         raise ValueError(f"{path.name}: the file name must contain 'v3.5' (tabpfn reads the model version from it).")
+    path = _real_named_file(path)
     stat = path.stat()
     key = (kind, str(path), stat.st_mtime_ns, stat.st_size, options["device"])
     with _NETWORK_LOCK:
